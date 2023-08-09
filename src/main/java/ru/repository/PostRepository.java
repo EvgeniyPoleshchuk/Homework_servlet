@@ -27,7 +27,7 @@ public class PostRepository {
     public Post save(Post post) {
         long count = counter.getAndIncrement();
         if (post.getId() > postMap.size()) {
-            throw new NotFoundException("Not found massage");
+            throw new NotFoundException("Not found massager");
         }
         if (post.getId() != 0) {
             postMap.put(post.getId(), post);
