@@ -11,6 +11,12 @@ import java.util.List;
 
 public class MainServlet extends HttpServlet {
     private PostController controller;
+    private static final String PATH = "/api/posts/";
+    private static final String PATH_WITH_NUM = PATH + "\\d+";
+    private static final String POST = "POST";
+    private static final String GET = "GET";
+    private static final String DELETE = "DELETE";
+
 
     @Override
     public void init() {
@@ -26,28 +32,31 @@ public class MainServlet extends HttpServlet {
             final var path = req.getRequestURI();
             final var method = req.getMethod();
             // primitive routing
-            if (method.equals("GET") && path.equals("/api/posts/")) {
+            if (method.equals(GET) && path.equals(PATH)) {
                 controller.all(resp);
                 return;
             }
-            if (method.equals("GET") && path.matches("/api/posts/\\d+")) {
+            if (method.equals(GET) && path.matches(PATH_WITH_NUM)) {
                 // easy way
                 final var id = Long.parseLong(path.substring(path.lastIndexOf("/") + 1));
                 controller.getById(id, resp);
                 return;
             }
-            if (method.equals("POST") && path.equals("/api/posts/")) {
+            if (method.equals(POST) && path.equals(PATH)) {
                 controller.save(req.getReader(), resp);
                 return;
             }
-            if (method.equals("DELETE") && path.matches("/api/posts/\\d+")) {
+            if (method.equals(DELETE) && path.matches(PATH_WITH_NUM)) {
                 // easy way
                 final var id = Long.parseLong(path.substring(path.lastIndexOf("/") + 1));
                 controller.removeById(id, resp);
                 return;
             }
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        } catch (Exception e) {
+        } catch(
+                Exception e)
+
+        {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
