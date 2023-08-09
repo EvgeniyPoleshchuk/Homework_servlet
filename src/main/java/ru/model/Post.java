@@ -1,4 +1,4 @@
-package netology.model;
+package ru.model;
 
 public class Post {
     private long id;
