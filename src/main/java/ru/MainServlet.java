@@ -1,17 +1,13 @@
 package ru;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 import ru.config.JavaConfig;
 import ru.controller.PostController;
-import ru.repository.PostRepository;
-import ru.service.PostService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
-public class Main extends HttpServlet {
+public class MainServlet extends HttpServlet {
     private PostController controller;
     private static final String PATH = "/api/posts/";
     private static final String PATH_WITH_NUM = PATH + "\\d+";
@@ -22,7 +18,7 @@ public class Main extends HttpServlet {
 
     @Override
     public void init() {
-        var context = new AnnotationConfigApplicationContext("ru");
+        var context = new AnnotationConfigApplicationContext();
         context.getBean(JavaConfig.class);
     }
 
