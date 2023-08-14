@@ -21,7 +21,7 @@ public class MainServlet extends HttpServlet {
     @Override
     public void init() {
         var context = new AnnotationConfigApplicationContext("ru.config");
-        controller = (PostController) context.getBean("javaConfig");
+        controller = (PostController) context.getBean("postController");
     }
 
     @Override
